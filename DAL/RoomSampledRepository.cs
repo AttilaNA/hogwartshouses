@@ -8,4 +8,9 @@ public class RoomSampledRepository : IRepository<Room>
     {
         _roomSampler = new RoomSampler();
     }
+
+    public HashSet<Room> GetAll()
+    {
+        return _roomSampler.Rooms;
+    }
 }

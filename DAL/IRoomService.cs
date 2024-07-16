@@ -2,5 +2,5 @@
 
 public interface IRoomService
 {
-
+    public HashSet<Room> GetAllRooms();
 }

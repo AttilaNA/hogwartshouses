@@ -8,4 +8,9 @@ public class RoomService : IRoomService
     {
         _repository = repository;
     }
+
+    public HashSet<Room> GetAllRooms()
+    {
+        return _repository.GetAll();
+    }
 }
