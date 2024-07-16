@@ -1,6 +1,9 @@
-﻿namespace hogwartshouses;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace hogwartshouses;
 
 public interface IRoomService
 {
-    public HashSet<Room> GetAllRooms();
+    HashSet<Room> GetAllRooms();
+    Room GetRoomById(int id);
 }

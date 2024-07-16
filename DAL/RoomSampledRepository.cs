@@ -1,4 +1,6 @@
-﻿namespace hogwartshouses;
+﻿using System.Runtime.InteropServices;
+
+namespace hogwartshouses;
 
 public class RoomSampledRepository : IRepository<Room>
 {
@@ -12,5 +14,10 @@ public class RoomSampledRepository : IRepository<Room>
     public HashSet<Room> GetAll()
     {
         return _roomSampler.Rooms;
+    }
+
+    public Room GetById(int id)
+    {
+        return _roomSampler.Rooms.Where(x => x.RoomNumber == id).First();
     }
 }

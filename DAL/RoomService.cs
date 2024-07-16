@@ -1,4 +1,6 @@
-﻿namespace hogwartshouses;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace hogwartshouses;
 
 public class RoomService : IRoomService
 {
@@ -12,5 +14,10 @@ public class RoomService : IRoomService
     public HashSet<Room> GetAllRooms()
     {
         return _repository.GetAll();
+    }
+
+    public Room GetRoomById(int id)
+    {
+        return _repository.GetById(id);
     }
 }
