@@ -20,4 +20,9 @@ public class RoomService : IRoomService
     {
         return _repository.GetById(id);
     }
+
+    public void AddRoom(Room room)
+    {
+        _repository.Add(room);
+    }
 }

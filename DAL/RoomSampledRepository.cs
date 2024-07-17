@@ -20,4 +20,11 @@ public class RoomSampledRepository : IRepository<Room>
     {
         return _roomSampler.Rooms.Where(x => x.RoomNumber == id).First();
     }
+
+    public void Add(Room obj)
+    {
+        // First make sure, that the room number is incremented.
+        obj.RoomNumber = _roomSampler.GetRoomNumber();
+        _roomSampler.Rooms.Add(obj);
+    }
 }

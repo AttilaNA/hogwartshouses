@@ -23,4 +23,21 @@ public class RoomSampler
             Rooms.Add(newRoom);
         }
     }
+
+    public int GetRoomNumber()
+    {
+        var roomNumberMax = 0;
+        try
+        {
+            roomNumberMax = Rooms.OrderByDescending(x => x.RoomNumber).First().RoomNumber + 1;
+        }
+        catch (InvalidOperationException)
+        {
+            roomNumberMax = 1;
+        }
+        
+        return roomNumberMax;
+    }
+
+    
 }

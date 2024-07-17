@@ -1,4 +1,6 @@
-﻿namespace hogwartshouses;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace hogwartshouses;
 
 [Serializable]
 public class Room
@@ -7,6 +9,7 @@ public class Room
 
     public List<Student> Students {get; set;}
 
+    [Range(1, 3)]
     public int RoomCapacity {get; set;}
 
     public Room()
