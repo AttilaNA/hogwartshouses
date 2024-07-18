@@ -30,3 +30,9 @@ By some magical accident, Hogwarts is completely out of rooms! We need to create
 While playing around with the Locus Novus spell, a few misplaced rooms have popped up accidentally, and now they block some corridors. We need a reverse spell to unmake a room.
 
 1. The room with the specified ID is deleted when calling the <span style="color: yellow">/rooms/{roomID}</span> endpoint with the DELETE method.
+
+### *Renovo Locus!*
+
+Some rooms require a bit of renovation, as they have become old, messy, and ugly over the centuries of usage.
+
+1. The room with the specified ID is updated when calling the <span style="color: yellow">/rooms/{roomId}</span> endpoint with the PUT method.
