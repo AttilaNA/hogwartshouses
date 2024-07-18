@@ -58,7 +58,22 @@ namespace HogwartsHouses.Controllers
             {
                 return NotFound();
             }
-            return RedirectToAction("GetRooms");
+            return NoContent();
+        }
+
+        [HttpPut("rooms/{id}")]
+        public IActionResult UpdateRoomByRoomNumber(int id, [FromBody] Room room)
+        {
+            try
+            {
+                _roomService.GetRoomById(id);
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
+            _roomService.UpdateRoom(id, room);
+            return NoContent();
         }
     }
 }

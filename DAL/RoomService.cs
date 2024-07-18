@@ -30,4 +30,9 @@ public class RoomService : IRoomService
     {
         return _repository.DeleteById(roomNumber);
     }
+
+    public void UpdateRoom(int id, Room room)
+    {
+        _repository.UpdateById(id, room);
+    }
 }

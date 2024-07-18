@@ -8,4 +8,5 @@ public interface IRoomService
     Room GetRoomById(int id);
     void AddRoom(Room room);
     bool DeleteRoomByRoomNumber(int roomNumber);
+    void UpdateRoom(int id, Room room);
 }

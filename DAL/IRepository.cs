@@ -8,4 +8,5 @@ public interface IRepository<T>
     T GetById(int id);
     void Add(T obj);
     bool DeleteById(int id);
+    void UpdateById(int id, T obj);
 }

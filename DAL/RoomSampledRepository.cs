@@ -33,4 +33,11 @@ public class RoomSampledRepository : IRepository<Room>
         var roomToDelete = GetById(id);
         return _roomSampler.Rooms.Remove(roomToDelete);
     }
+
+    public void UpdateById(int id, Room obj)
+    {
+        var roomToUpdate = GetById(id);
+        roomToUpdate.RoomCapacity = obj.RoomCapacity;
+        roomToUpdate.Students = obj.Students;
+    }
 }
