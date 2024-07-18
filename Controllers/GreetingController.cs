@@ -46,5 +46,19 @@ namespace HogwartsHouses.Controllers
             _roomService.AddRoom(room);
             return RedirectToAction("GetRooms");
         }
+
+        [HttpDelete("rooms/{id}")]
+        public IActionResult DeleteRoomByRoomNumber(int id)
+        {
+            try
+            {
+                _roomService.DeleteRoomByRoomNumber(id);
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
+            return RedirectToAction("GetRooms");
+        }
     }
 }

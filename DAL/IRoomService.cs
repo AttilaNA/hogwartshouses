@@ -7,4 +7,5 @@ public interface IRoomService
     HashSet<Room> GetAllRooms();
     Room GetRoomById(int id);
     void AddRoom(Room room);
+    bool DeleteRoomByRoomNumber(int roomNumber);
 }

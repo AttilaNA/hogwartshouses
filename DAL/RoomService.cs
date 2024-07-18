@@ -25,4 +25,9 @@ public class RoomService : IRoomService
     {
         _repository.Add(room);
     }
+
+    public bool DeleteRoomByRoomNumber(int roomNumber)
+    {
+        return _repository.DeleteById(roomNumber);
+    }
 }

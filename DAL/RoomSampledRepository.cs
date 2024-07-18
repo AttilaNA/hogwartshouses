@@ -27,4 +27,10 @@ public class RoomSampledRepository : IRepository<Room>
         obj.RoomNumber = _roomSampler.GetRoomNumber();
         _roomSampler.Rooms.Add(obj);
     }
+
+    public bool DeleteById(int id)
+    {
+        var roomToDelete = GetById(id);
+        return _roomSampler.Rooms.Remove(roomToDelete);
+    }
 }
