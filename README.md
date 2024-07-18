@@ -24,3 +24,9 @@ Dumbledore tasked prof. McGonagall with writing a list of all rooms on a piece o
 By some magical accident, Hogwarts is completely out of rooms! We need to create some new empty rooms, so that the students have a place to live. A room should be big enough for more than one student.
 
 1. A new room can be added when calling the <span style="color: yellow">/rooms</span> endpoint with the POST method.
+
+### *Erado Locus!*
+
+While playing around with the Locus Novus spell, a few misplaced rooms have popped up accidentally, and now they block some corridors. We need a reverse spell to unmake a room.
+
+1. The room with the specified ID is deleted when calling the <span style="color: yellow">/rooms/{roomID}</span> endpoint with the DELETE method.
