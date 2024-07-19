@@ -1,4 +1,5 @@
 using hogwartshouses;
+using hogwartshouses.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IRepository<Room>>(x => new RoomSampledRepository());
-builder.Services.AddSingleton<IRoomService>(x => new RoomService(x.GetRequiredService<IRepository<Room>>()));
+builder.Services.AddSingleton<Sampler>();
+builder.Services.AddSingleton<IRepository<Room>>(x => new RoomSampledRepository(x.GetRequiredService<Sampler>()));
+builder.Services.AddSingleton<IRepository<Student>>(x => new StudentSampledRepository(x.GetRequiredService<Sampler>()));
+builder.Services.AddSingleton<IHostelService>(x => new HostelService(x.GetRequiredService<IRepository<Room>>(), x.GetRequiredService<IRepository<Student>>()));
 
 var app = builder.Build();
 

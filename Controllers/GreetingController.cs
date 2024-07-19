@@ -7,11 +7,11 @@ namespace HogwartsHouses.Controllers
     [ApiController]
     public class GreetingController : ControllerBase
     {
-        IRoomService _roomService {get;}
+        IHostelService _hostelService {get;}
         
-        public GreetingController(IRoomService roomService)
+        public GreetingController(IHostelService hostelService)
         {
-            _roomService = roomService;
+            _hostelService = hostelService;
         }
         
         [HttpGet("{name?}")]
@@ -23,7 +23,7 @@ namespace HogwartsHouses.Controllers
         [HttpGet("rooms/")]
         public ActionResult<HashSet<Room>> GetRooms()
         {
-            return _roomService.GetAllRooms();
+            return _hostelService.GetAllRooms();
         }
 
         [HttpGet("rooms/{id}")]
@@ -31,19 +31,19 @@ namespace HogwartsHouses.Controllers
         {
             try
             {
-                _roomService.GetRoomById(id);
+                _hostelService.GetRoomById(id);
             }
             catch (InvalidOperationException)
             {
                 return NotFound();
             }
-            return _roomService.GetRoomById(id);
+            return _hostelService.GetRoomById(id);
         }
 
         [HttpPost("rooms/")]
         public IActionResult CreateNewRoom([FromBody] Room room)
         {
-            _roomService.AddRoom(room);
+            _hostelService.AddRoom(room);
             return RedirectToAction("GetRooms");
         }
 
@@ -52,7 +52,7 @@ namespace HogwartsHouses.Controllers
         {
             try
             {
-                _roomService.DeleteRoomByRoomNumber(id);
+                _hostelService.DeleteRoomByRoomNumber(id);
             }
             catch (InvalidOperationException)
             {
@@ -66,14 +66,41 @@ namespace HogwartsHouses.Controllers
         {
             try
             {
-                _roomService.GetRoomById(id);
+                _hostelService.GetRoomById(id);
             }
             catch (InvalidOperationException)
             {
                 return NotFound();
             }
-            _roomService.UpdateRoom(id, room);
+            _hostelService.UpdateRoom(id, room);
             return NoContent();
+        }
+
+        [HttpGet("students/")]
+        public ActionResult<HashSet<Student>> GetStudents()
+        {
+            return _hostelService.GetAllStudents();
+        }
+
+        [HttpGet("students/{id}")]
+        public ActionResult<Student> GetStudentbyId(int id)
+        {
+            try
+            {
+                _hostelService.GetStudentById(id);
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
+            return _hostelService.GetStudentById(id);
+        }
+
+        [HttpPost("students/")]
+        public IActionResult RegisterNewStudent([FromBody] Student student)
+        {
+            _hostelService.AddStudent(student);
+            return RedirectToAction("GetStudents");
         }
     }
 }

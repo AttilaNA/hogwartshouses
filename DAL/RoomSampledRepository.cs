@@ -1,37 +1,38 @@
 ﻿using System.Runtime.InteropServices;
+using hogwartshouses.DAL;
 
 namespace hogwartshouses;
 
 public class RoomSampledRepository : IRepository<Room>
 {
-    private RoomSampler _roomSampler { get; }
+    private Sampler _sampler { get; }
 
-    public RoomSampledRepository()
+    public RoomSampledRepository(Sampler sampler)
     {
-        _roomSampler = new RoomSampler();
+        _sampler = sampler;
     }
 
     public HashSet<Room> GetAll()
     {
-        return _roomSampler.Rooms;
+        return _sampler.Rooms;
     }
 
     public Room GetById(int id)
     {
-        return _roomSampler.Rooms.Where(x => x.RoomNumber == id).First();
+        return _sampler.Rooms.Where(x => x.RoomNumber == id).First();
     }
 
     public void Add(Room obj)
     {
         // First make sure, that the room number is incremented.
-        obj.RoomNumber = _roomSampler.GetRoomNumber();
-        _roomSampler.Rooms.Add(obj);
+        obj.RoomNumber = _sampler.GetRoomNumber();
+        _sampler.Rooms.Add(obj);
     }
 
     public bool DeleteById(int id)
     {
         var roomToDelete = GetById(id);
-        return _roomSampler.Rooms.Remove(roomToDelete);
+        return _sampler.Rooms.Remove(roomToDelete);
     }
 
     public void UpdateById(int id, Room obj)
