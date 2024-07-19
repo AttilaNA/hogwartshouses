@@ -54,8 +54,25 @@ public class HostelService : IHostelService
         _studentRepository.Add(student);
     }
 
-    public void AssignStudentToRoom(Student student, Room room)
+    public void AssignStudentToRoom(int studentId, int roomNumber)
     {
-        throw new NotImplementedException();
+        _roomRepository.GetById(roomNumber).Students.Add(_studentRepository.GetById(studentId));
+    }
+
+    public int GetNumberOfFreeBads(int roomNumber)
+    {
+        var room = _roomRepository.GetById(roomNumber);
+        var emptyBads = room.RoomCapacity - room.Students.Count;
+        return emptyBads;
+    }
+
+    public bool StudentHasRoom(int studentId)
+    {
+        var rooms = GetAllRooms();
+        var students = rooms.SelectMany(x => x.Students).Where(x => x.StudentId == studentId);
+        if(students.Count() == 0){
+            return false;
+        }
+        return true;
     }
 }

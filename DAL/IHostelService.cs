@@ -12,5 +12,7 @@ public interface IHostelService
     HashSet<Student> GetAllStudents();
     Student GetStudentById(int id);
     void AddStudent(Student student);
-    void AssignStudentToRoom(Student student, Room room);
+    void AssignStudentToRoom(int studentId, int roomNumber);
+    int GetNumberOfFreeBads(int roomNumber);
+    bool StudentHasRoom(int studentId);
 }
