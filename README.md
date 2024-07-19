@@ -36,3 +36,17 @@ While playing around with the Locus Novus spell, a few misplaced rooms have popp
 Some rooms require a bit of renovation, as they have become old, messy, and ugly over the centuries of usage.
 
 1. The room with the specified ID is updated when calling the <span style="color: yellow">/rooms/{roomId}</span> endpoint with the PUT method.
+
+### *The list of students*
+
+Hermione Granger and Draco Malfoy have just arrived at Hogwarts. As long as they are not on the list of the students, Filch will not allow them to enter. Put them on the list, so they can enter before the dinner is over.
+
+1. Two student entities are stored in the application memory.
+
+### *New rooms for students*
+
+Dinner's over, time for bed. But wait, which one? Hermione and Draco aren't assigned to their new rooms yet! Help them find their new rooms (separate, of course).
+
+1. At least two empty rooms are stored in the application memory.
+2. Hermione and Draco are assigned to separate rooms.
+
