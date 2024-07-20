@@ -41,7 +41,11 @@ namespace HogwartsHouses.Controllers
             }
             catch (InvalidOperationException)
             {
-                return NotFound();
+                return NotFound(new {
+                    Message = $"Room with room number {id} does not exist.",
+                    Status = 404,
+                    Type = 3
+                });
             }
             return _hostelService.GetRoomById(id);
         }
@@ -62,13 +66,17 @@ namespace HogwartsHouses.Controllers
             }
             catch (InvalidOperationException)
             {
-                return NotFound();
+                return NotFound(new {
+                    Message = $"Room with room number {id} does not exist.",
+                    Status = 404,
+                    Type = 3
+                });
             }
             return NoContent();
         }
 
-        [HttpPut("rooms/{id}")]
-        public IActionResult UpdateRoomByRoomNumber(int id, [FromBody] Room room)
+        [HttpPut("updateRoomCapacity/{id}")]
+        public IActionResult UpdateRoomCapacityByRoomNumber(int id, [FromBody] Room room)
         {
             try
             {
@@ -76,7 +84,11 @@ namespace HogwartsHouses.Controllers
             }
             catch (InvalidOperationException)
             {
-                return NotFound();
+                return NotFound(new {
+                    Message = $"Room with room number {id} does not exist.",
+                    Status = 404,
+                    Type = 3
+                });
             }
             _hostelService.UpdateRoom(id, room);
             return NoContent();
@@ -97,7 +109,11 @@ namespace HogwartsHouses.Controllers
             }
             catch (InvalidOperationException)
             {
-                return NotFound();
+                return NotFound(new {
+                    Message = $"Student with id {id} does not exist.",
+                    Status = 404,
+                    Type = 3
+                });
             }
             return _hostelService.GetStudentById(id);
         }
@@ -228,6 +244,25 @@ namespace HogwartsHouses.Controllers
             }
 
             _hostelService.DeleteStudentByStudentId(studentId);
+            return NoContent();
+        }
+
+        [HttpPut("updateStudentName/{id}")]
+        public IActionResult UpdateStudentNameByStudentId(int id, [FromBody] Student student)
+        {
+            try
+            {
+                _hostelService.GetStudentById(id);
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound(new {
+                    Message = $"Student with id {id} does not exist.",
+                    Status = 404,
+                    Type = 3
+                });
+            }
+            _hostelService.UpdateStudent(id, student);
             return NoContent();
         }
     }

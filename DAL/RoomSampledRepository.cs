@@ -26,6 +26,7 @@ public class RoomSampledRepository : IRepository<Room>
     {
         // First make sure, that the room number is incremented.
         obj.RoomNumber = _sampler.GetRoomNumber();
+        obj.Students = new HashSet<Student>();
         _sampler.Rooms.Add(obj);
     }
 
@@ -39,6 +40,5 @@ public class RoomSampledRepository : IRepository<Room>
     {
         var roomToUpdate = GetById(id);
         roomToUpdate.RoomCapacity = obj.RoomCapacity;
-        roomToUpdate.Students = obj.Students;
     }
 }

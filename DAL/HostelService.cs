@@ -100,4 +100,9 @@ public class HostelService : IHostelService
     {
         return _studentRepository.DeleteById(studentId);
     }
+
+    public void UpdateStudent(int id, Student student)
+    {
+        _studentRepository.UpdateById(id, student);
+    }
 }

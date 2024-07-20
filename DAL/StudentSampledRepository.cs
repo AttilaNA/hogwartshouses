@@ -39,7 +39,8 @@ namespace hogwartshouses.DAL
 
         public void UpdateById(int id, Student obj)
         {
-            throw new NotImplementedException();
+            var studentToUpdate = GetById(id);
+            studentToUpdate.StudentName = obj.StudentName;
         }
     }
 }

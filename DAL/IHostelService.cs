@@ -18,4 +18,5 @@ public interface IHostelService
     void RemoveStudentFromRoom(int studentId);
     HashSet<Room> GetNotFullyBookedRooms();
     bool DeleteStudentByStudentId(int studentId);
+    void UpdateStudent(int id, Student student);
 }
