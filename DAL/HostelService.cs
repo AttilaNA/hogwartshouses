@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace hogwartshouses;
 
@@ -74,5 +75,12 @@ public class HostelService : IHostelService
             return false;
         }
         return true;
+    }
+
+    public void RemoveStudentFromRoom(int studentId)
+    {
+        var rooms = GetAllRooms();
+        var room = rooms.Select(x => x).Where(x => x.Students.Select(y => y.StudentId).Contains(studentId)).First();
+        room.Students.RemoveWhere(x => x.StudentId == studentId);
     }
 }

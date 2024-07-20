@@ -103,7 +103,7 @@ namespace HogwartsHouses.Controllers
             return RedirectToAction("GetStudents");
         }
 
-        [HttpGet("assignment")]
+        [HttpGet("checkin")]
         public IActionResult AssignStudentToRoom([FromQuery] int roomNumber, [FromQuery] int studentId)
         {
             // check if request is valid
@@ -113,7 +113,8 @@ namespace HogwartsHouses.Controllers
                     Message = "Room number and Student id must be provided.",
                     RequestWasSentFrom = $"{HttpContext.Request.Scheme}//{HttpContext.Request.Host.Value}{HttpContext.Request.Path}{HttpContext.Request.QueryString}",
                     RequestCorrectExample = $"{HttpContext.Request.Scheme}//{HttpContext.Request.Host.Value}/assignment?roomNumber=2&studentId=6",
-                    Code = 450,
+                    Status = 400,
+                    Type = 1
                 });
             }
 
@@ -126,7 +127,8 @@ namespace HogwartsHouses.Controllers
             {
                 return NotFound(new {
                     Message = $"Room with number {roomNumber} does not exist.",
-                    Code = 451
+                    Status = 404,
+                    Type = 2
                 });
             }
 
@@ -139,7 +141,8 @@ namespace HogwartsHouses.Controllers
             {
                 return NotFound(new {
                     Message = $"Student with id {studentId} does not exist.",
-                    Code = 452
+                    Status = 404,
+                    Type = 3
                 });
             }
 
@@ -147,7 +150,8 @@ namespace HogwartsHouses.Controllers
             if(_hostelService.GetNumberOfFreeBads(roomNumber) == 0){
                 return BadRequest(new {
                     Message = "Room is already full!",
-                    Code = 453,
+                    Status = 400,
+                    Type = 4
                 });
             }
 
@@ -156,11 +160,42 @@ namespace HogwartsHouses.Controllers
                 return BadRequest(new {
                     Message = "Student has already a room.",
                     Instruction = "Remove student from the used room first.",
-                    Code = 454,
+                    Status = 400,
+                    Type = 5
                 });
             }
             _hostelService.AssignStudentToRoom(studentId, roomNumber);
             return RedirectToAction("GetRooms");
+        }
+
+        [HttpDelete("checkout/{studentId}")]
+        public IActionResult RemoveStudentFromRoom(int studentId)
+        {
+            // check if student exists
+            try
+            {
+                _hostelService.GetStudentById(studentId);
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound(new {
+                    Message = $"Student with id {studentId} does not exist.",
+                    Status = 404,
+                    Type = 3
+                });
+            }
+
+            // make sure that student is assigned to a room
+            if(!_hostelService.StudentHasRoom(studentId)){
+                return BadRequest(new {
+                    Message = "Student is not checkedIn yet.",
+                    Instruction = "Assign student to a room",
+                    Status = 400,
+                    Type = 6
+                });
+            }
+            _hostelService.RemoveStudentFromRoom(studentId);
+            return NoContent();
         }
     }
 }

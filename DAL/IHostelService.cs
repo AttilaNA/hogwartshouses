@@ -15,4 +15,5 @@ public interface IHostelService
     void AssignStudentToRoom(int studentId, int roomNumber);
     int GetNumberOfFreeBads(int roomNumber);
     bool StudentHasRoom(int studentId);
+    void RemoveStudentFromRoom(int studentId);
 }
