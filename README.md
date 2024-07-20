@@ -50,3 +50,13 @@ Dinner's over, time for bed. But wait, which one? Hermione and Draco aren't assi
 1. At least two empty rooms are stored in the application memory.
 2. Hermione and Draco are assigned to separate rooms.
 
+### *Play around*
+
+Add some functionality to the server.
+
+1. Assign student to room.
+2. Remove student from room.
+3. List all available rooms.
+4. Remove stundent from hostel.
+5. Update name of student.
+
