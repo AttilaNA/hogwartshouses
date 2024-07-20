@@ -33,7 +33,8 @@ namespace hogwartshouses.DAL
 
         public bool DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var student = GetById(id);
+            return _sampler.Students.Remove(student);
         }
 
         public void UpdateById(int id, Student obj)

@@ -109,7 +109,7 @@ namespace HogwartsHouses.Controllers
             return RedirectToAction("GetStudents");
         }
 
-        [HttpGet("checkin")]
+        [HttpGet("checkinStudent")]
         public IActionResult AssignStudentToRoom([FromQuery] int roomNumber, [FromQuery] int studentId)
         {
             // check if request is valid
@@ -174,7 +174,7 @@ namespace HogwartsHouses.Controllers
             return RedirectToAction("GetRooms");
         }
 
-        [HttpDelete("checkout/{studentId}")]
+        [HttpDelete("checkoutStudent/{studentId}")]
         public IActionResult RemoveStudentFromRoom(int studentId)
         {
             // check if student exists
@@ -201,6 +201,33 @@ namespace HogwartsHouses.Controllers
                 });
             }
             _hostelService.RemoveStudentFromRoom(studentId);
+            return NoContent();
+        }
+
+        [HttpDelete("students/{studentId}")]
+        public IActionResult DeleteStudentFromHostel(int studentId)
+        {
+            // check if student exists
+            try
+            {
+                _hostelService.GetStudentById(studentId);
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound(new {
+                    Message = $"Student with id {studentId} does not exist.",
+                    Status = 404,
+                    Type = 3
+                });
+            }
+
+            // make sure that student is assigned to a room
+            if(_hostelService.StudentHasRoom(studentId))
+            {
+                _hostelService.RemoveStudentFromRoom(studentId);
+            }
+
+            _hostelService.DeleteStudentByStudentId(studentId);
             return NoContent();
         }
     }

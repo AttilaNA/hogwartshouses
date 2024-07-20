@@ -95,4 +95,9 @@ public class HostelService : IHostelService
         }
         return roomsWithEmptyBads;
     }
+
+    public bool DeleteStudentByStudentId(int studentId)
+    {
+        return _studentRepository.DeleteById(studentId);
+    }
 }
