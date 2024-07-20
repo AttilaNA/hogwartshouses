@@ -83,4 +83,16 @@ public class HostelService : IHostelService
         var room = rooms.Select(x => x).Where(x => x.Students.Select(y => y.StudentId).Contains(studentId)).First();
         room.Students.RemoveWhere(x => x.StudentId == studentId);
     }
+
+    public HashSet<Room> GetNotFullyBookedRooms()
+    {
+        var rooms = GetAllRooms();
+        var roomsWithEmptyBads = new HashSet<Room>();
+        var roomsWithEmptyBadsQueried = rooms.Select(x => x).Where(x => x.Students.Count() < x.RoomCapacity);
+        foreach (var room in roomsWithEmptyBadsQueried)
+        {
+            roomsWithEmptyBads.Add(room);
+        }
+        return roomsWithEmptyBads;
+    }
 }

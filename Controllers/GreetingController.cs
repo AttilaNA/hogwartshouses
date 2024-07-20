@@ -26,6 +26,12 @@ namespace HogwartsHouses.Controllers
             return _hostelService.GetAllRooms();
         }
 
+        [HttpGet("availableRooms/")]
+        public ActionResult<HashSet<Room>> GetAvailableRooms()
+        {
+            return _hostelService.GetNotFullyBookedRooms();
+        }
+
         [HttpGet("rooms/{id}")]
         public ActionResult<Room> GetRoombyId(int id)
         {

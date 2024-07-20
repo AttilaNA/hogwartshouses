@@ -16,4 +16,5 @@ public interface IHostelService
     int GetNumberOfFreeBads(int roomNumber);
     bool StudentHasRoom(int studentId);
     void RemoveStudentFromRoom(int studentId);
+    HashSet<Room> GetNotFullyBookedRooms();
 }
